@@ -1,23 +1,14 @@
 import 'phaser';
 import config from '../Config/config';
+import Player from '../Entities/Player';
 
 export default class GameScene extends Phaser.Scene {
   constructor () {
     super('Game');
   }
 
-  moveBg () {
-    this.time.addEvent({
-      delay: 32080,
-      callback: () => {
-        this.bgCity2.setX(config.width);
-      },
-      loop: true,
-    })
-  }
-
   create () {
-    this.platform = this.physics.add.staticImage(config.width / 2, config.height + 300, 'sea');
+    this.platform = this.physics.add.staticImage(config.width / 2, config.height + 220, 'sea');
 
     this.bgSeaGroup = this.add.group();
     for (let i = 0; i < 2; i++) {
@@ -38,9 +29,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.obs = this.physics.add.image(config.width/2, config.height/2, 'checkedBox');
     this.obs.setVelocityX(-200);
-    this.player = this.physics.add.sprite(60, config.height - 100, 'run1').play('run');
-    this.player.setScale(0.2, 0.2);
-    this.player.body.setGravityY(300);
+    this.player = new Player(this, 60, config.height - 100, 'run').setScale(0.2, 0.2);
+    this.player.body.setGravityY(220);
 
     this.physics.add.collider(this.player, this.platform);
 
@@ -56,16 +46,29 @@ export default class GameScene extends Phaser.Scene {
 
     this.bgSeaGroup.children.iterate(element => {
       if (element.x <= -element.width * 0.325) {
-        element.setX(1000);
+        element.setX(800);
       }
     });
 
-   if (this.obs.x < 20) {
-     this.obs.setX(config.width + 100);
-   }
+    if (this.obs.x < 20) {
+      this.obs.setX(config.width + 100);
+    }
 
-   if (this.jumpKey.isDown && this.player.body.touching.down) {
-     this.player.setVelocityY(-220);
-   }
+    if (this.player.body.touching.down) {
+      this.player.anims.play('run', true);
+      this.player.setData('dJump', true);
+    }
+
+    if (this.jumpKey.isDown && this.player.body.touching.down) {
+      this.player.body.setVelocityY(-210);
+      this.player.anims.play('jump', true);
+    }
+
+    if (Phaser.Input.Keyboard.JustDown(this.jumpKey) && this.player.getData('dJump') === true && !this.player.body.touching.down) {
+      this.player.setData('dJump', false);
+      this.player.anims.stop();
+      this.player.anims.play('jump', true);
+      this.player.body.setVelocityY(-180);
+    }
   }
 };

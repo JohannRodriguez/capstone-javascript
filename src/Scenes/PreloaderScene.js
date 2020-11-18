@@ -114,6 +114,38 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('run18', '/src/assets/character/Run (18).png');
     this.load.image('run19', '/src/assets/character/Run (19).png');
     this.load.image('run20', '/src/assets/character/Run (20).png');
+    this.load.image('jump1', '/src/assets/character/Jump (1).png');
+    this.load.image('jump2', '/src/assets/character/Jump (2).png');
+    this.load.image('jump3', '/src/assets/character/Jump (3).png');
+    this.load.image('jump4', '/src/assets/character/Jump (4).png');
+    this.load.image('jump5', '/src/assets/character/Jump (5).png');
+    this.load.image('jump6', '/src/assets/character/Jump (6).png');
+    this.load.image('jump7', '/src/assets/character/Jump (7).png');
+    this.load.image('jump8', '/src/assets/character/Jump (8).png');
+    this.load.image('jump9', '/src/assets/character/Jump (9).png');
+    this.load.image('jump10', '/src/assets/character/Jump (10).png');
+    this.load.image('jump11', '/src/assets/character/Jump (12).png');
+    this.load.image('jump12', '/src/assets/character/Jump (12).png');
+    this.load.image('jump13', '/src/assets/character/Jump (13).png');
+    this.load.image('jump14', '/src/assets/character/Jump (14).png');
+    this.load.image('jump15', '/src/assets/character/Jump (15).png');
+    this.load.image('jump16', '/src/assets/character/Jump (16).png');
+    this.load.image('jump17', '/src/assets/character/Jump (17).png');
+    this.load.image('jump18', '/src/assets/character/Jump (18).png');
+    this.load.image('jump19', '/src/assets/character/Jump (19).png');
+    this.load.image('jump20', '/src/assets/character/Jump (20).png');
+    this.load.image('jump21', '/src/assets/character/Jump (21).png');
+    this.load.image('jump22', '/src/assets/character/Jump (22).png');
+    this.load.image('jump23', '/src/assets/character/Jump (23).png');
+    this.load.image('jump24', '/src/assets/character/Jump (24).png');
+    this.load.image('jump25', '/src/assets/character/Jump (25).png');
+    this.load.image('jump26', '/src/assets/character/Jump (26).png');
+    this.load.image('jump27', '/src/assets/character/Jump (27).png');
+    this.load.image('jump28', '/src/assets/character/Jump (28).png');
+    this.load.image('jump29', '/src/assets/character/Jump (29).png');
+    this.load.image('jump30', '/src/assets/character/Jump (30).png');
+   
+
   }
 
   create () {
@@ -142,7 +174,43 @@ export default class PreloaderScene extends Phaser.Scene {
       ],
       frameRate: 30,
       repeat: -1
-  });
+    });
+    this.anims.create({
+      key: 'jump',
+      frames: [
+          { key: 'jump1' },
+          { key: 'jump2' },
+          { key: 'jump3' },
+          { key: 'jump4' },
+          { key: 'jump5' },
+          { key: 'jump6' },
+          { key: 'jump7' },
+          { key: 'jump8' },
+          { key: 'jump9' },
+          { key: 'jump10' },
+          { key: 'jump11' },
+          { key: 'jump12' },
+          { key: 'jump13' },
+          { key: 'jump14' },
+          { key: 'jump15' },
+          { key: 'jump17' },
+          { key: 'jump18' },
+          { key: 'jump19' },
+          { key: 'jump20' },
+          { key: 'jump21' },
+          { key: 'jump22' },
+          { key: 'jump23' },
+          { key: 'jump24' },
+          { key: 'jump25' },
+          { key: 'jump26' },
+          { key: 'jump27' },
+          { key: 'jump28' },
+          { key: 'jump29' },
+          { key: 'jump30' }
+      ],
+      frameRate: 40,
+      repeat: 1
+    });
   }
 
   ready () {
