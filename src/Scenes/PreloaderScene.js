@@ -79,16 +79,70 @@ export default class PreloaderScene extends Phaser.Scene {
 
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
-    // load assets needed in our game
-    this.load.image('blueButton1', '../src/assets/ui/blue_button02.png');
-    this.load.image('blueButton2', '../src/assets/ui/blue_button03.png');
-    this.load.image('phaserLogo', '../src/assets/logo.png');
-    this.load.image('box', '../src/assets/ui/grey_box.png');
-    this.load.image('checkedBox', '../src/assets/ui/blue_boxCheckmark.png');
+    // load ui
+    this.load.image('blueButton1', '/src/assets/ui/blue_button02.png');
+    this.load.image('blueButton2', '/src/assets/ui/blue_button03.png');
+    this.load.image('phaserLogo', '/src/assets/logo.png');
+    this.load.image('box', '/src/assets/ui/grey_box.png');
+    this.load.image('checkedBox', '/src/assets/ui/blue_boxCheckmark.png');
+
+    // load background
+    this.load.image('city', '/src/assets/background/glowing_city.png');
+    this.load.image('sea', '/src/assets/background/water_reflection.png')
+
+    // load audio
+    this.load.audio('bgMusic', ['/src/assets/music.mp3']);
+
+    // load main character
+    this.load.image('run1', '/src/assets/character/Run (1).png');
+    this.load.image('run2', '/src/assets/character/Run (2).png');
+    this.load.image('run3', '/src/assets/character/Run (3).png');
+    this.load.image('run4', '/src/assets/character/Run (4).png');
+    this.load.image('run5', '/src/assets/character/Run (5).png');
+    this.load.image('run6', '/src/assets/character/Run (6).png');
+    this.load.image('run7', '/src/assets/character/Run (7).png');
+    this.load.image('run8', '/src/assets/character/Run (8).png');
+    this.load.image('run9', '/src/assets/character/Run (9).png');
+    this.load.image('run10', '/src/assets/character/Run (10).png');
+    this.load.image('run11', '/src/assets/character/Run (11).png');
+    this.load.image('run12', '/src/assets/character/Run (12).png');
+    this.load.image('run13', '/src/assets/character/Run (13).png');
+    this.load.image('run14', '/src/assets/character/Run (14).png');
+    this.load.image('run15', '/src/assets/character/Run (15).png');
+    this.load.image('run16', '/src/assets/character/Run (16).png');
+    this.load.image('run17', '/src/assets/character/Run (17).png');
+    this.load.image('run18', '/src/assets/character/Run (18).png');
+    this.load.image('run19', '/src/assets/character/Run (19).png');
+    this.load.image('run20', '/src/assets/character/Run (20).png');
   }
 
   create () {
-    
+    this.anims.create({
+      key: 'run',
+      frames: [
+          { key: 'run1' },
+          { key: 'run2' },
+          { key: 'run3' },
+          { key: 'run4' },
+          { key: 'run5' },
+          { key: 'run6' },
+          { key: 'run7' },
+          { key: 'run8' },
+          { key: 'run9' },
+          { key: 'run10' },
+          { key: 'run11' },
+          { key: 'run12' },
+          { key: 'run13' },
+          { key: 'run14' },
+          { key: 'run15' },
+          { key: 'run17' },
+          { key: 'run18' },
+          { key: 'run19' },
+          { key: 'run20' }
+      ],
+      frameRate: 30,
+      repeat: -1
+  });
   }
 
   ready () {
