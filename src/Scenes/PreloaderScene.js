@@ -85,11 +85,18 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('phaserLogo', '/src/assets/logo.png');
     this.load.image('box', '/src/assets/ui/grey_box.png');
     this.load.image('checkedBox', '/src/assets/ui/blue_boxCheckmark.png');
+    this.load.image('btn', '/src/assets/ui/normal_btn.png');
+    this.load.image('btnH', '/src/assets/ui/hover_btn.png');
+    this.load.image('mscBtnOn', '/src/assets/ui/music_on_btn.png');
+    this.load.image('mscBtnOff', '/src/assets/ui/music_off_btn.png');
+    this.load.image('pause', '/src/assets/ui/pause_menu.png');
 
     // load background
     this.load.image('city', '/src/assets/background/glowing_city.png');
     this.load.image('sea', '/src/assets/background/water_reflection.png');
     this.load.image('sky', '/src/assets/background/space.png');
+    this.load.image('mainBg', '/src/assets/background/game_bg.png');
+    this.load.image('bgB', '/src/assets/background/BG_back.png');
 
     // load audio
     this.load.audio('bgMusic', ['/src/assets/music.mp3']);
