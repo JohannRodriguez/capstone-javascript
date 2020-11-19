@@ -88,10 +88,14 @@ export default class PreloaderScene extends Phaser.Scene {
 
     // load background
     this.load.image('city', '/src/assets/background/glowing_city.png');
-    this.load.image('sea', '/src/assets/background/water_reflection.png')
+    this.load.image('sea', '/src/assets/background/water_reflection.png');
+    this.load.image('sky', '/src/assets/background/space.png');
 
     // load audio
     this.load.audio('bgMusic', ['/src/assets/music.mp3']);
+
+    // load enemies
+    this.load.image('clob', '/src/assets/enemies/clob.png');
 
     // load main character
     this.load.image('run1', '/src/assets/character/Run (1).png');
@@ -144,11 +148,41 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('jump28', '/src/assets/character/Jump (28).png');
     this.load.image('jump29', '/src/assets/character/Jump (29).png');
     this.load.image('jump30', '/src/assets/character/Jump (30).png');
-   
+    this.load.image('dead1', '/src/assets/character/Dead (1).png');
+    this.load.image('dead2', '/src/assets/character/Dead (2).png');
+    this.load.image('dead3', '/src/assets/character/Dead (3).png');
+    this.load.image('dead4', '/src/assets/character/Dead (4).png');
+    this.load.image('dead5', '/src/assets/character/Dead (5).png');
+    this.load.image('dead6', '/src/assets/character/Dead (6).png');
+    this.load.image('dead7', '/src/assets/character/Dead (7).png');
+    this.load.image('dead8', '/src/assets/character/Dead (8).png');
+    this.load.image('dead9', '/src/assets/character/Dead (9).png');
+    this.load.image('dead10', '/src/assets/character/Dead (10).png');
+    this.load.image('dead11', '/src/assets/character/Dead (12).png');
+    this.load.image('dead12', '/src/assets/character/Dead (12).png');
+    this.load.image('dead13', '/src/assets/character/Dead (13).png');
+    this.load.image('dead14', '/src/assets/character/Dead (14).png');
+    this.load.image('dead15', '/src/assets/character/Dead (15).png');
+    this.load.image('dead16', '/src/assets/character/Dead (16).png');
+    this.load.image('dead17', '/src/assets/character/Dead (17).png');
+    this.load.image('dead18', '/src/assets/character/Dead (18).png');
+    this.load.image('dead19', '/src/assets/character/Dead (19).png');
+    this.load.image('dead20', '/src/assets/character/Dead (20).png');
+    this.load.image('dead21', '/src/assets/character/Dead (21).png');
+    this.load.image('dead22', '/src/assets/character/Dead (22).png');
+    this.load.image('dead23', '/src/assets/character/Dead (23).png');
+    this.load.image('dead24', '/src/assets/character/Dead (24).png');
+    this.load.image('dead25', '/src/assets/character/Dead (25).png');
+    this.load.image('dead26', '/src/assets/character/Dead (26).png');
+    this.load.image('dead27', '/src/assets/character/Dead (27).png');
+    this.load.image('dead28', '/src/assets/character/Dead (28).png');
+    this.load.image('dead29', '/src/assets/character/Dead (29).png');
+    this.load.image('dead30', '/src/assets/character/Dead (30).png');
 
   }
 
   create () {
+
     this.anims.create({
       key: 'run',
       frames: [
@@ -210,6 +244,42 @@ export default class PreloaderScene extends Phaser.Scene {
       ],
       frameRate: 40,
       repeat: 1
+    });
+    this.anims.create({
+      key: 'dead',
+      frames: [
+          { key: 'dead1' },
+          { key: 'dead2' },
+          { key: 'dead3' },
+          { key: 'dead4' },
+          { key: 'dead5' },
+          { key: 'dead6' },
+          { key: 'dead7' },
+          { key: 'dead8' },
+          { key: 'dead9' },
+          { key: 'dead10' },
+          { key: 'dead11' },
+          { key: 'dead12' },
+          { key: 'dead13' },
+          { key: 'dead14' },
+          { key: 'dead15' },
+          { key: 'dead17' },
+          { key: 'dead18' },
+          { key: 'dead19' },
+          { key: 'dead20' },
+          { key: 'dead21' },
+          { key: 'dead22' },
+          { key: 'dead23' },
+          { key: 'dead24' },
+          { key: 'dead25' },
+          { key: 'dead26' },
+          { key: 'dead27' },
+          { key: 'dead28' },
+          { key: 'dead29' },
+          { key: 'dead30' }
+      ],
+      frameRate: 30,
+      repeat: 0
     });
   }
 
