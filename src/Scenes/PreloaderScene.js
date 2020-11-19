@@ -96,6 +96,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
     // load enemies
     this.load.image('clob', '/src/assets/enemies/clob.png');
+    this.load.image('kingClob', '/src/assets/enemies/king_clob.png');
 
     // load main character
     this.load.image('run1', '/src/assets/character/Run (1).png');

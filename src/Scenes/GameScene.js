@@ -8,15 +8,30 @@ export default class GameScene extends Phaser.Scene {
   }
 
   hit (player) {
-    if (player.getData('isDead') === false) {
-      player.anims.play('dead', true);
-    }
-    player.setData('isDead', true);
+    // console.log('hit');
+    // if (player.getData('isDead') === false) {
+    //   player.anims.play('dead', true);
+    // }
+    // player.setData('isDead', true);
   }
 
   create () {
+    this.enemyHold = [];
     this.platform = this.physics.add.staticImage(config.width / 2, config.height + 300, 'sea');
     this.sky = this.add.image(config.width / 2, config.height / 2, 'sky').setScale(0.45);
+    this.activeEnemies = 0;
+
+    this.time.addEvent({
+      delay: Phaser.Math.Between(2200, 3300),
+      callback: () => {
+        const num = Math.floor(Math.random() * (this.enemyHold.length - this.activeEnemies));
+        const enemy = this.enemyHold[num];
+        enemy.setVelocityX(-250);
+        this.activeEnemies += 1;
+        this.enemyHold.push(this.enemyHold.splice(this.enemyHold.indexOf(enemy), 1)[0]);
+      },
+      loop: true,
+    });
 
     this.bgSeaGroup = this.add.group();
     for (let i = 0; i < 3; i++) {
@@ -36,11 +51,17 @@ export default class GameScene extends Phaser.Scene {
     }
 
     this.enemies = this.add.group();
-    for (let i = 0; i < 1; i++) {
-      const clob = this.physics.add.sprite(Phaser.Math.Between(2000, 4000), config.height - 85, 'clob');
-      clob.setScale(0.15, 0.15);
-      clob.setVelocityX(-250);
+    for (let i = 0; i < 2; i++) {
+      const clobKing = this.physics.add.sprite(config.width + 100, config.height - 85, 'kingClob');
+      clobKing.setScale(0.14, 0.14);
+      this.enemies.add(clobKing);
+      this.enemyHold.push(clobKing);
+    }
+    for (let i = 0; i < 3; i++) {
+      const clob = this.physics.add.sprite(config.width + 100, config.height - 85, 'clob');
+      clob.setScale(0.14, 0.14);
       this.enemies.add(clob);
+      this.enemyHold.push(clob);
     }
 
     this.player = new Player(this, 60, config.height - 100, 'run').setScale(0.2, 0.2);
@@ -68,8 +89,10 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.enemies.children.iterate(enemy => {
-      if (enemy.x < -20) {
-        enemy.setX(Phaser.Math.Between(900, 4000));
+      if (enemy.x < -50) {
+        enemy.setVelocityX(0);
+        enemy.setX(config.width + 10 + (enemy.width * 0.14));
+        this.activeEnemies -= 1;
       }
     });
     
