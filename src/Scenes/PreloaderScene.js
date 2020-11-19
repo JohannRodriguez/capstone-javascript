@@ -279,7 +279,7 @@ export default class PreloaderScene extends Phaser.Scene {
           { key: 'dead29' },
           { key: 'dead30' }
       ],
-      frameRate: 30,
+      frameRate: 40,
       repeat: 0
     });
   }

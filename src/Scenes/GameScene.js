@@ -7,12 +7,35 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
   }
 
+  stopMovement(parents) {
+    for (let i = 0; i < parents.length; i++) {
+      parents[i].children.iterate(element => {
+        element.setVelocityX(0);
+      });
+    }
+  }
+
   hit (player) {
-    // console.log('hit');
-    // if (player.getData('isDead') === false) {
-    //   player.anims.play('dead', true);
-    // }
-    // player.setData('isDead', true);
+    if (player.getData('isDead') === false) {
+      player.anims.play('dead', true);
+      player.body.setVelocityX(250);
+      player.body.setAccelerationX(-120);
+      this.time.addEvent({
+        delay: 2100,
+        callback: () => {
+          player.body.setAccelerationX(0);
+          player.body.setVelocityX(0);
+        }
+      });
+      this.stopMovement([this.enemies, this.bgSeaGroup, this.bgCityGroup]);
+      this.time.addEvent({
+        delay: 4500,
+        callback: () => {
+          console.log('You are dead');
+        }
+      });
+    }
+    player.setData('isDead', true);
   }
 
   create () {
@@ -20,18 +43,6 @@ export default class GameScene extends Phaser.Scene {
     this.platform = this.physics.add.staticImage(config.width / 2, config.height + 300, 'sea');
     this.sky = this.add.image(config.width / 2, config.height / 2, 'sky').setScale(0.45);
     this.activeEnemies = 0;
-
-    this.time.addEvent({
-      delay: Phaser.Math.Between(2200, 3300),
-      callback: () => {
-        const num = Math.floor(Math.random() * (this.enemyHold.length - this.activeEnemies));
-        const enemy = this.enemyHold[num];
-        enemy.setVelocityX(-250);
-        this.activeEnemies += 1;
-        this.enemyHold.push(this.enemyHold.splice(this.enemyHold.indexOf(enemy), 1)[0]);
-      },
-      loop: true,
-    });
 
     this.bgSeaGroup = this.add.group();
     for (let i = 0; i < 3; i++) {
@@ -68,6 +79,20 @@ export default class GameScene extends Phaser.Scene {
     this.player.body.setGravityY(220);
     this.player.body.setSize(110, 400);
     this.player.body.setOffset(180, 50);
+
+    this.time.addEvent({
+      delay: Phaser.Math.Between(2200, 3300),
+      callback: () => {
+        if (this.player.getData('isDead') === false) {
+          const num = Math.floor(Math.random() * (this.enemyHold.length - this.activeEnemies));
+          const enemy = this.enemyHold[num];
+          enemy.setVelocityX(-250);
+          this.activeEnemies += 1;
+          this.enemyHold.push(this.enemyHold.splice(this.enemyHold.indexOf(enemy), 1)[0]);
+        }
+      },
+      loop: true,
+    });
 
     this.physics.add.collider(this.player, this.platform);
 
