@@ -1,15 +1,16 @@
 import 'phaser';
 import config from '../Config/config';
+import Button from '../Objects/Button';
 
 export default class GameOver extends Phaser.Scene {
   constructor () {
     super('GameOver');
   }
 
-  init (stars, points) {
-    this.stars = points;
-    this.points = stars;
-    this.totalScore = (this.stars * 5) + this.points;
+  init (data) {
+    this.stars = data[0];
+    this.points = data[1];
+    this.totalScore = (data[0] * 5) + data[1];
   }
 
   sumScores (points, text, op = 1) {
@@ -27,8 +28,10 @@ export default class GameOver extends Phaser.Scene {
     this.time.addEvent({
       delay: delay,
       callback: () => {
-        sum += quotient;
-        text.setText(`${sum}`);
+        if (points > 0) {
+          sum += quotient;
+          text.setText(`${sum}`);
+        }
       },
       repeat: times,
     });
@@ -86,5 +89,8 @@ export default class GameOver extends Phaser.Scene {
     this.time.delayedCall(4500, () => { this.sumScores(this.totalScore, this.scoreTotal) });
     this.time.delayedCall(4500, () => { this.sumScores(this.stars, this.starPoints, -1) });
     this.time.delayedCall(4500, () => { this.sumScores(this.points, this.scorePoints, -1) });
-  };
+
+    this.titleButton = new Button(this, config.width - 150, config.height/2 - 100, 'btn', 'btnH', 'Back to title', 'Title', '45px').setScale(0.4);
+    this.ScoresButton = new Button(this, config.width - 150, config.height/2 + 100, 'btn', 'btnH', 'Submit Score', 'Title', '45px').setScale(0.4);
+  }
 }
