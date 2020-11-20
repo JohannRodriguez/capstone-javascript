@@ -90,6 +90,12 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('mscBtnOn', '/src/assets/ui/music_on_btn.png');
     this.load.image('mscBtnOff', '/src/assets/ui/music_off_btn.png');
     this.load.image('pause', '/src/assets/ui/pause_menu.png');
+    this.load.image('gameOver', '/src/assets/ui/game_over.png');
+    this.load.image('points', '/src/assets/ui/points.png');
+    this.load.image('scoreContainer', '/src/assets/ui/score_container.png');
+    this.load.image('scoreShow', '/src/assets/ui/score_show.png');
+    this.load.image('stars', '/src/assets/ui/stars.png');
+    this.load.image('total', '/src/assets/ui/total.png');
 
     // load background
     this.load.image('city', '/src/assets/background/glowing_city.png');
@@ -293,10 +299,10 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready () {
-    this.scene.start('Title');
+    this.scene.start('GameOver');
     this.readyCount++;
     if (this.readyCount === 2) {
-      this.scene.start('Title');
+      this.scene.start('GameOver');
     }
   }
 };

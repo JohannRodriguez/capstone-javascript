@@ -49,7 +49,7 @@ export default class GameScene extends Phaser.Scene {
       this.time.addEvent({
         delay: 4500,
         callback: () => {
-          console.log('You are dead');
+          this.scene.start('GameOver', this.player.getData('stars'), this.player.getData('points'));
         }
       });
     }
@@ -62,18 +62,27 @@ export default class GameScene extends Phaser.Scene {
     this.sky = this.add.image(config.width / 2, config.height / 2, 'sky').setScale(0.45);
     this.activeEnemies = 0;
 
-    this.starsPoints = this.add.text(680, 32, '0', {
+    this.pointsContainer = this.add.image(10, 10, 'scoreContainer').setOrigin(0, 0);
+    this.pointsContainer.setScale(0.5);
+    this.pointsIcon = this.add.image(25, 30, 'points');
+    this.pointsIcon.setScale(0.4);
+    this.starsContainer = this.add.image(config.width - 10, 10, 'scoreContainer').setOrigin(1, 0);
+    this.starsContainer.setScale(0.5);
+    this.starsIcon = this.add.image(config.width - 140, 30, 'stars');
+    this.starsIcon.setScale(0.4);
+    this.starsPoints = this.add.text(config.width - 110, 19, '0', {
       font: '20px Arial',
       fill: '#ffffff',
       align: 'center',
       fontStyle: 'bold',
     });
-    this.scorePoints = this.add.text(20, 32, '0', {
+    this.scorePoints = this.add.text(60, 19, '0', {
       font: '20px Arial',
       fill: '#ffffff',
       align: 'center',
       fontStyle: 'bold',
     });
+ 
 
     this.bgSeaGroup = this.add.group();
     for (let i = 0; i < 3; i++) {
