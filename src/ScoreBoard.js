@@ -3,11 +3,6 @@ export default class ScoreBoard {
     this.key = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/5lEO0b8qNPXwMWWCwsKz/scores/';
   }
 
-  getData (data) {
-    this.scores = data;
-  }
-
-
   async getScores () {
     const data = await fetch(this.key, { mode: 'cors' });
     return data.json();

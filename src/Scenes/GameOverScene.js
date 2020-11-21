@@ -91,6 +91,6 @@ export default class GameOver extends Phaser.Scene {
     this.time.delayedCall(4500, () => { this.sumScores(this.points, this.scorePoints, -1) });
 
     this.titleButton = new Button(this, config.width - 150, config.height/2 - 100, 'btn', 'btnH', 'Back to title', 'Title', '45px').setScale(0.4);
-    this.ScoresButton = new Button(this, config.width - 150, config.height/2 + 100, 'btn', 'btnH', 'Submit Score', 'Title', '45px').setScale(0.4);
+    this.ScoresButton = new Button(this, config.width - 150, config.height/2 + 100, 'btn', 'btnH', 'Submit Score', 'SubmitScore', '45px', this.totalScore).setScale(0.4);
   }
 }

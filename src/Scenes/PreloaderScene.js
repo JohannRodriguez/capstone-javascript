@@ -80,11 +80,6 @@ export default class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
     // load ui
-    this.load.image('blueButton1', '/src/assets/ui/blue_button02.png');
-    this.load.image('blueButton2', '/src/assets/ui/blue_button03.png');
-    this.load.image('phaserLogo', '/src/assets/logo.png');
-    this.load.image('box', '/src/assets/ui/grey_box.png');
-    this.load.image('checkedBox', '/src/assets/ui/blue_boxCheckmark.png');
     this.load.image('btn', '/src/assets/ui/normal_btn.png');
     this.load.image('btnH', '/src/assets/ui/hover_btn.png');
     this.load.image('mscBtnOn', '/src/assets/ui/music_on_btn.png');
@@ -96,6 +91,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('scoreShow', '/src/assets/ui/score_show.png');
     this.load.image('stars', '/src/assets/ui/stars.png');
     this.load.image('total', '/src/assets/ui/total.png');
+    this.load.spritesheet('load', '/src/assets/ui/load.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
 
     // load background
     this.load.image('city', '/src/assets/background/glowing_city.png');
@@ -194,10 +193,19 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('dead29', '/src/assets/character/Dead (29).png');
     this.load.image('dead30', '/src/assets/character/Dead (30).png');
 
+    this.load.html('nameForm', '/src/assets/Forms/NameForm.html');
   }
 
   create () {
-
+    this.anims.create({
+      key: 'loadAnim',
+      frames: this.anims.generateFrameNumbers('load', {
+        start: 0,
+        end: 7,
+      }),
+      frameRate: 20,
+      repeat: -1,
+    });
     this.anims.create({
       key: 'run',
       frames: [
@@ -299,7 +307,7 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready () {
-    // this.scene.start('GameOver');
+    // this.scene.start('SubmitScore', 100);
     this.scene.start('Title');
     this.readyCount++;
     if (this.readyCount === 2) {
