@@ -106,6 +106,7 @@ export default class GameScene extends Phaser.Scene {
     this.player = new Player(this, 60, config.height - 100, 'run').setScale(0.2, 0.2);
     
     // Enemies respawn
+    this.prevent600 = false;
     this.respawn = this.time.addEvent({
       delay: 4000,
       callback: () => {
@@ -117,7 +118,15 @@ export default class GameScene extends Phaser.Scene {
           }
           this.activeEnemies += 1;
           this.enemyHold.push(this.enemyHold.splice(this.enemyHold.indexOf(enemy), 1)[0]);
-          this.respawn.delay = this.gameHelper.spawnReset();
+          let newRespawn = this.gameHelper.spawnReset();
+          if (this.prevent600 === true && newRespawn === 600) {
+            newRespawn = 2200;
+            this.prevent600 = false;
+          }
+          if (newRespawn === 600) {
+            this.prevent600 = true;
+          }
+          this.respawn.delay = newRespawn;
         }
       },
       loop: true,
