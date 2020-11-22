@@ -6,13 +6,34 @@ export default class GameHelper extends Phaser.Scene {
     this.scene = scene
   }
 
-  populateGroup(group, times, x, y, img, orX, orY, sc, vel) {
+  spawnReset () {
+    const chance = Phaser.Math.Between(1, 100);
+    if (chance <= 15) {
+      return 600;
+    } else if (chance <= 35) {
+      return 2200;
+    } else if (chance <= 70) {
+      return 3000;
+    } else {
+      return 3500
+    }
+  }
+
+  populateGroup(group, times, x, y, img, orX, orY, scX, scY, vel, iTimes = false, arrPush = undefined) {
     for (let i = 0; i < times; i++) {
-      const bgSea = this.scene.physics.add.image(x, y, img);
-      bgSea.setOrigin(orX, orY);
-      bgSea.setScale(sc);
-      bgSea.setVelocityX(vel);
-      group.add(bgSea);
+      let element = '';
+      if (iTimes === true) {
+        element = this.scene.physics.add.image(x * i, y, img);
+      } else {
+        element = this.scene.physics.add.image(x, y, img);
+      }
+      element.setOrigin(orX, orY);
+      element.setScale(scX, scY);
+      element.setVelocityX(vel);
+      group.add(element);
+      if (arrPush) {
+        arrPush.push(element);
+      }
     }
   }
 }

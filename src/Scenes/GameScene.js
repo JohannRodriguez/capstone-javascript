@@ -2,6 +2,7 @@ import 'phaser';
 import config from '../Config/config';
 import Player from '../Entities/Player';
 import Helper from '../Helpers/GeneralHelper';
+import GameHelper from '../Helpers/GameHelper';
 
 export default class GameScene extends Phaser.Scene {
   constructor () {
@@ -9,6 +10,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   stopMovement(parents) {
+    // Stop Background when player dies
     for (let i = 0; i < parents.length; i++) {
       parents[i].children.iterate(element => {
         element.setVelocityX(0);
@@ -17,6 +19,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   starReset(star, player, picked = true) {
+    // Respawn star when player picks it
     if (player.getData('isDead') === false) {
       if (picked === true) {
         star.body.enable = false;
@@ -32,6 +35,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   hit (player) {
+    // Player dead actions
     if (player.getData('isDead') === false) {
       player.anims.play('dead', true);
       player.body.setVelocityX(250);
@@ -60,66 +64,34 @@ export default class GameScene extends Phaser.Scene {
   create () {
     // Create needed tools
     this.helper = new Helper(this);
+    this.gameHelper = new GameHelper(this);
 
     // Display background
     this.platform = this.physics.add.staticImage(config.width / 2, config.height + 300, 'sea');
     this.sky = this.add.image(config.width / 2, config.height / 2, 'sky').setScale(0.45);
     this.bgSeaGroup = this.add.group();
-    for (let i = 0; i < 3; i++) {
-      const bgSea = this.physics.add.image(1247.025 * i, config.height, 'sea');
-      bgSea.setOrigin(0, 1);
-      bgSea.setScale(0.325, 0.325);
-      bgSea.setVelocityX(-250);
-      this.bgSeaGroup.add(bgSea);
-    }
+    this.gameHelper.populateGroup(this.bgSeaGroup, 3, 1247.025, config.height, 'sea', 0, 1, 0.325, 0.325, -250, true);
     this.bgCityGroup = this.add.group();
-    for (let i = 0; i < 2; i++) {
-      const bgCity = this.physics.add.image(801.933 * i, 0, 'city');
-      bgCity.setOrigin(0, 0);
-      bgCity.setScale(0.209, 0.325);
-      bgCity.setVelocityX(-30);
-      this.bgCityGroup.add(bgCity);
-    }
+    this.gameHelper.populateGroup(this.bgCityGroup, 2, 801.933, 0, 'city', 0, 0, 0.209, 0.325, -30, true);
 
-
-    this.enemyHold = [];
-    this.activeEnemies = 0;
-
+    // Display player scores
     this.pointsContainer = this.add.image(10, 10, 'scoreContainer').setOrigin(0, 0);
     this.pointsContainer.setScale(0.5);
     this.pointsIcon = this.add.image(25, 30, 'points');
     this.pointsIcon.setScale(0.4);
+    this.scorePoints = this.helper.newText(60, 19, '0');
     this.starsContainer = this.add.image(config.width - 10, 10, 'scoreContainer').setOrigin(1, 0);
     this.starsContainer.setScale(0.5);
     this.starsIcon = this.add.image(config.width - 140, 30, 'stars');
     this.starsIcon.setScale(0.4);
-    this.starsPoints = this.add.text(config.width - 110, 19, '0', {
-      font: '20px Arial',
-      fill: '#ffffff',
-      align: 'center',
-      fontStyle: 'bold',
-    });
-    this.scorePoints = this.add.text(60, 19, '0', {
-      font: '20px Arial',
-      fill: '#ffffff',
-      align: 'center',
-      fontStyle: 'bold',
-    });
-
+    this.starsPoints = this.helper.newText(config.width - 110, 19, '0');
+ 
     // Create enemies
+    this.enemyHold = [];
+    this.activeEnemies = 0;
     this.enemies = this.add.group();
-    for (let i = 0; i < 2; i++) {
-      const clobKing = this.physics.add.sprite(config.width + 100, config.height - 85, 'kingClob');
-      clobKing.setScale(0.14, 0.14);
-      this.enemies.add(clobKing);
-      this.enemyHold.push(clobKing);
-    }
-    for (let i = 0; i < 3; i++) {
-      const clob = this.physics.add.sprite(config.width + 100, config.height - 85, 'clob');
-      clob.setScale(0.14, 0.14);
-      this.enemies.add(clob);
-      this.enemyHold.push(clob);
-    }
+    this.gameHelper.populateGroup(this.enemies, 2, config.width + 100, config.height - 85, 'kingClob', 0.5, 0.5, 0.14, 0.14, 0, false, this.enemyHold);
+    this.gameHelper.populateGroup(this.enemies, 3, config.width + 100, config.height - 85, 'clob', 0.5, 0.5, 0.14, 0.14, 0, false, this.enemyHold);
 
     // Create stars
     this.starsGroup = this.add.group();
@@ -134,15 +106,18 @@ export default class GameScene extends Phaser.Scene {
     this.player = new Player(this, 60, config.height - 100, 'run').setScale(0.2, 0.2);
     
     // Enemies respawn
-    this.time.addEvent({
-      delay: Phaser.Math.Between(2000, 3300),
+    this.respawn = this.time.addEvent({
+      delay: 4000,
       callback: () => {
         if (this.player.getData('isDead') === false) {
           const num = Math.floor(Math.random() * (this.enemyHold.length - this.activeEnemies));
           const enemy = this.enemyHold[num];
-          enemy.setVelocityX(-250);
+          if (enemy) {
+            enemy.setVelocityX(-250);
+          }
           this.activeEnemies += 1;
           this.enemyHold.push(this.enemyHold.splice(this.enemyHold.indexOf(enemy), 1)[0]);
+          this.respawn.delay = this.gameHelper.spawnReset();
         }
       },
       loop: true,
@@ -160,12 +135,13 @@ export default class GameScene extends Phaser.Scene {
       loop: true,
     });
 
+    // Game bodies interactions
     this.physics.add.collider(this.player, this.platform);
     this.physics.add.overlap(this.player, this.enemies, this.hit, null, this);
     this.physics.add.overlap(this.starsGroup, this.player, this.starReset, null, this);
 
+    // Create keys
     this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
   }
 
   update () {
