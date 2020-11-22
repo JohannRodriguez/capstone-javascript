@@ -99,6 +99,8 @@ export default class GameScene extends Phaser.Scene {
       const star = this.physics.add.sprite(Phaser.Math.Between(2000, 6000), Phaser.Math.Between(350, 500), 'star');
       star.setScale(0.14, 0.14);
       star.setVelocityX(-250);
+      star.body.setSize(150, 200);
+      star.body.setOffset(15, 10);
       this.starsGroup.add(star);
     }
 
@@ -146,7 +148,7 @@ export default class GameScene extends Phaser.Scene {
 
     // Game bodies interactions
     this.physics.add.collider(this.player, this.platform);
-    this.physics.add.overlap(this.player, this.enemies, this.hit, null, this);
+    // this.physics.add.overlap(this.player, this.enemies, this.hit, null, this);
     this.physics.add.overlap(this.starsGroup, this.player, this.starReset, null, this);
 
     // Create keys
