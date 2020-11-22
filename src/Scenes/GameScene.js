@@ -1,6 +1,7 @@
 import 'phaser';
 import config from '../Config/config';
 import Player from '../Entities/Player';
+import Helper from '../Helpers/GeneralHelper';
 
 export default class GameScene extends Phaser.Scene {
   constructor () {
@@ -57,9 +58,31 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create () {
-    this.enemyHold = [];
+    // Create needed tools
+    this.helper = new Helper(this);
+
+    // Display background
     this.platform = this.physics.add.staticImage(config.width / 2, config.height + 300, 'sea');
     this.sky = this.add.image(config.width / 2, config.height / 2, 'sky').setScale(0.45);
+    this.bgSeaGroup = this.add.group();
+    for (let i = 0; i < 3; i++) {
+      const bgSea = this.physics.add.image(1247.025 * i, config.height, 'sea');
+      bgSea.setOrigin(0, 1);
+      bgSea.setScale(0.325, 0.325);
+      bgSea.setVelocityX(-250);
+      this.bgSeaGroup.add(bgSea);
+    }
+    this.bgCityGroup = this.add.group();
+    for (let i = 0; i < 2; i++) {
+      const bgCity = this.physics.add.image(801.933 * i, 0, 'city');
+      bgCity.setOrigin(0, 0);
+      bgCity.setScale(0.209, 0.325);
+      bgCity.setVelocityX(-30);
+      this.bgCityGroup.add(bgCity);
+    }
+
+
+    this.enemyHold = [];
     this.activeEnemies = 0;
 
     this.pointsContainer = this.add.image(10, 10, 'scoreContainer').setOrigin(0, 0);
@@ -84,22 +107,7 @@ export default class GameScene extends Phaser.Scene {
     });
  
 
-    this.bgSeaGroup = this.add.group();
-    for (let i = 0; i < 3; i++) {
-      const bgSea = this.physics.add.image(1247.025 * i, config.height, 'sea');
-      bgSea.setOrigin(0, 1);
-      bgSea.setScale(0.325, 0.325);
-      bgSea.setVelocityX(-250);
-      this.bgSeaGroup.add(bgSea);
-    }
-    this.bgCityGroup = this.add.group();
-    for (let i = 0; i < 2; i++) {
-      const bgCity = this.physics.add.image(801.933 * i, 0, 'city');
-      bgCity.setOrigin(0, 0);
-      bgCity.setScale(0.209, 0.325);
-      bgCity.setVelocityX(-30);
-      this.bgCityGroup.add(bgCity);
-    }
+    
     this.enemies = this.add.group();
     for (let i = 0; i < 2; i++) {
       const clobKing = this.physics.add.sprite(config.width + 100, config.height - 85, 'kingClob');

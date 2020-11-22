@@ -15,6 +15,7 @@ export default class SubmitScore extends Phaser.Scene {
   }
  
   async create () {
+    console.log('Right Scene');
     // Create needed tools
     this.helper = new Helper(this);
     this.scoreBoard = new ScoreBoard;
@@ -59,7 +60,7 @@ export default class SubmitScore extends Phaser.Scene {
         this.scene.start('Title');
       } else {
         if (validation === 'Your score will be submited shortly, you can return now') {
-          this.submision = this.scoreBoard.submitScore(usrInput, this.score);
+          this.submision = this.scoreBoard.submitScore(usrInput.value, this.score);
           usrInput.value = '';
           this.alertTxt.setText(validation);
           this.alertTxt.x -= 150;
