@@ -15,7 +15,6 @@ export default class SubmitScore extends Phaser.Scene {
   }
  
   async create () {
-    console.log('Right Scene');
     // Create needed tools
     this.helper = new Helper(this);
     this.scoreBoard = new ScoreBoard;

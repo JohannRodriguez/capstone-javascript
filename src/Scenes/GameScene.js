@@ -105,9 +105,8 @@ export default class GameScene extends Phaser.Scene {
       align: 'center',
       fontStyle: 'bold',
     });
- 
 
-    
+    // Create enemies
     this.enemies = this.add.group();
     for (let i = 0; i < 2; i++) {
       const clobKing = this.physics.add.sprite(config.width + 100, config.height - 85, 'kingClob');
@@ -122,6 +121,7 @@ export default class GameScene extends Phaser.Scene {
       this.enemyHold.push(clob);
     }
 
+    // Create stars
     this.starsGroup = this.add.group();
     for (let i = 0; i < 3; i++) {
       const star = this.physics.add.sprite(Phaser.Math.Between(2000, 6000), Phaser.Math.Between(350, 500), 'star');
@@ -130,11 +130,10 @@ export default class GameScene extends Phaser.Scene {
       this.starsGroup.add(star);
     }
 
+    // Create player
     this.player = new Player(this, 60, config.height - 100, 'run').setScale(0.2, 0.2);
-    this.player.body.setGravityY(220);
-    this.player.body.setSize(110, 400);
-    this.player.body.setOffset(180, 50);
-
+    
+    // Enemies respawn
     this.time.addEvent({
       delay: Phaser.Math.Between(2000, 3300),
       callback: () => {
@@ -148,6 +147,8 @@ export default class GameScene extends Phaser.Scene {
       },
       loop: true,
     });
+
+    // Acumulate points over time
     this.time.addEvent({
       delay: 300,
       callback: () => {
@@ -160,10 +161,11 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.player, this.platform);
-
-    this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.physics.add.overlap(this.player, this.enemies, this.hit, null, this);
     this.physics.add.overlap(this.starsGroup, this.player, this.starReset, null, this);
+
+    this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
   }
 
   update () {
