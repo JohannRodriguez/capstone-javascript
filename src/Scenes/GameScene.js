@@ -1,7 +1,7 @@
 import 'phaser';
 import config from '../Config/config';
 import Player from '../Entities/Player';
-import Helper from '../Helpers/GeneralHelper';
+import { spawnReset } from '../Helpers/GeneralHelper';
 import GameHelper from '../Helpers/GameHelper';
 
 export default class GameScene extends Phaser.Scene {
@@ -63,7 +63,6 @@ export default class GameScene extends Phaser.Scene {
 
   create () {
     // Create needed tools
-    this.helper = new Helper(this);
     this.gameHelper = new GameHelper(this);
 
     // Display background
@@ -79,12 +78,12 @@ export default class GameScene extends Phaser.Scene {
     this.pointsContainer.setScale(0.5);
     this.pointsIcon = this.add.image(25, 30, 'points');
     this.pointsIcon.setScale(0.4);
-    this.scorePoints = this.helper.newText(60, 19, '0');
+    this.scorePoints = this.gameHelper.newText(60, 19, '0');
     this.starsContainer = this.add.image(config.width - 10, 10, 'scoreContainer').setOrigin(1, 0);
     this.starsContainer.setScale(0.5);
     this.starsIcon = this.add.image(config.width - 140, 30, 'stars');
     this.starsIcon.setScale(0.4);
-    this.starsPoints = this.helper.newText(config.width - 110, 19, '0');
+    this.starsPoints = this.gameHelper.newText(config.width - 110, 19, '0');
  
     // Create enemies
     this.enemyHold = [];
@@ -120,7 +119,7 @@ export default class GameScene extends Phaser.Scene {
           }
           this.activeEnemies += 1;
           this.enemyHold.push(this.enemyHold.splice(this.enemyHold.indexOf(enemy), 1)[0]);
-          let newRespawn = this.gameHelper.spawnReset();
+          let newRespawn = spawnReset();
           if (this.prevent600 === true && newRespawn === 600) {
             newRespawn = 2200;
             this.prevent600 = false;
@@ -148,7 +147,7 @@ export default class GameScene extends Phaser.Scene {
 
     // Game bodies interactions
     this.physics.add.collider(this.player, this.platform);
-    // this.physics.add.overlap(this.player, this.enemies, this.hit, null, this);
+    this.physics.add.overlap(this.player, this.enemies, this.hit, null, this);
     this.physics.add.overlap(this.starsGroup, this.player, this.starReset, null, this);
 
     // Create keys

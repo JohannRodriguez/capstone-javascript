@@ -1,8 +1,8 @@
 import 'phaser';
 import config from '../Config/config';
 import ScoreBoard from '../ScoreBoard';
-import inputValidation from '../Helpers/SubmitScoreHelper';
-import Helper from '../Helpers/GeneralHelper';
+import { inputValidation } from '../Helpers/GeneralHelper';
+import Helper from '../Helpers/GameHelper';
 
 
 export default class SubmitScore extends Phaser.Scene {

@@ -6,17 +6,13 @@ export default class GameHelper extends Phaser.Scene {
     this.scene = scene
   }
 
-  spawnReset () {
-    const chance = Phaser.Math.Between(1, 100);
-    if (chance <= 15) {
-      return 600;
-    } else if (chance <= 35) {
-      return 2200;
-    } else if (chance <= 70) {
-      return 3000;
-    } else {
-      return 3500
-    }
+  newText(width, height, text, font = 20) {
+    return this.scene.add.text(width, height, text, {
+        font: `${font}px Arial`,
+        fill: '#ffffff',
+        align: 'center',
+        fontStyle: 'bold',
+    });
   }
 
   populateGroup(group, times, x, y, img, orX, orY, scX, scY, vel, iTimes = false, arrPush = undefined) {
