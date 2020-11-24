@@ -16,7 +16,7 @@ export default class GameOverScene extends Phaser.Scene {
     let quotient = (Math.floor(points / 12)) * op;
     let times = 11;
     let sum = 0;
-    const delay = 80;
+    const del = 80;
     if (points < 12) {
       quotient = 1;
       times = points - 1;
@@ -25,7 +25,7 @@ export default class GameOverScene extends Phaser.Scene {
       sum = points;
     }
     this.time.addEvent({
-      delay: delay,
+      delay: del,
       callback: () => {
         if (points > 0) {
           sum += quotient;

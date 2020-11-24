@@ -15,14 +15,15 @@ const inputValidation = (string, arr) => {
 
 const spawnReset = () => {
   const chance = Math.floor((Math.random() * 10) + 1);
+  let num = 3500
   if (chance <= 15) {
-    return 600;
+    num = 600;
   } else if (chance <= 35) {
-    return 2200;
+    num = 2200;
   } else if (chance <= 70) {
-    return 3000;
+    num = 3000;
   }
-  return 3500;
-}
+  return num;
+};
 
-export { inputValidation, spawnReset} ;
+export{ inputValidation, spawnReset} ;
