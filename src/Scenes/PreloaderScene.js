@@ -194,6 +194,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('dead30', './assets/character/Dead (30).png');
 
     this.load.html('nameForm', './assets/Forms/NameForm.html');
+
+    window.onerror = () => {
+      location.reload();
+    }
   }
 
   create () {
@@ -307,6 +311,9 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready () {
+    window.onerror = () => {
+      location.reload();
+    }
     this.scene.start('Title');
     this.readyCount++;
     if (this.readyCount === 2) {

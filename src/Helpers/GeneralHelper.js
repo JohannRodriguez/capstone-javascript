@@ -14,7 +14,7 @@ const inputValidation = (string, arr) => {
 };
 
 const spawnReset = () => {
-  const chance = Math.floor((Math.random() * 10) + 1);
+  const chance = Math.floor((Math.random() * 100) + 1);
   if (chance <= 15) {
     return 600;
   } else if (chance <= 35) {
