@@ -8,10 +8,6 @@ it('Checks if given string is to long', () => {
   expect(inputValidation('Lilith Niniane', [{ user: 'Lilith' }])).toBe('The name is too long');
 });
 
-it('Checks if given string has special characters', () => {
-  expect(inputValidation('@Lilith', [{ user: 'Lilith' }])).toBe("The name can't contain special characters");
-});
-
 it('Checks if given string already exists', () => {
   expect(inputValidation('Lilith', [{ user: 'Lilith' }])).toBe('This name is taken');
 });

@@ -7,9 +7,10 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
   init(data) {
-    this.stars = data[0];
-    this.points = data[1];
-    this.totalScore = (data[0] * 5) + data[1];
+    let [star, point] = [data[0], data[1]];
+    this.stars = star;
+    this.points = point;
+    this.totalScore = (star * 5) + point[1];
   }
 
   sumScores(points, text, op = 1) {

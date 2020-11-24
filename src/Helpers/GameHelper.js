@@ -6,7 +6,8 @@ export default class GameHelper extends Phaser.Scene {
 
   stopMovement(parents) {
     // Stop Background when player dies
-    for (let i = 0; i < parents.length; i += 1) {
+    this.parent = parents
+    for (let i = 0; i < this.parent.length; i += 1) {
       parents[i].children.iterate(element => {
         element.setVelocityX(0);
       });
