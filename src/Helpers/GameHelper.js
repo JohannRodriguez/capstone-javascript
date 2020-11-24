@@ -1,3 +1,5 @@
+import Phaser from 'phaser';
+
 export default class GameHelper extends Phaser.Scene {
   constructor(scene) {
     super(scene);
