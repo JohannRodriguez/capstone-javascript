@@ -75,7 +75,7 @@ export default class ScoresScene extends Phaser.Scene {
             fontStyle: 'bold',
           });
         }
-        this.i +=;
+        this.i += 1;
       },
       repeat: 9,
     });
