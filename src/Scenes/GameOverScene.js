@@ -7,7 +7,7 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
   init(data) {
-    let [star, point] = [data[0], data[1]];
+    const [star, point] = [data[0], data[1]];
     this.stars = star;
     this.points = point;
     this.totalScore = (star * 5) + point[1];
