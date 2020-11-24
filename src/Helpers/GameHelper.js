@@ -1,22 +1,22 @@
 import 'phaser';
 
 export default class GameHelper extends Phaser.Scene {
-  constructor (scene) {
+  constructor(scene) {
     super(scene);
-    this.scene = scene
+    this.scene = scene;
   }
 
   newText(width, height, text, font = 20) {
     return this.scene.add.text(width, height, text, {
-        font: `${font}px Arial`,
-        fill: '#ffffff',
-        align: 'center',
-        fontStyle: 'bold',
+      font: `${font}px Arial`,
+      fill: '#ffffff',
+      align: 'center',
+      fontStyle: 'bold',
     });
   }
 
-  populateGroup(group, times, x, y, img, orX, orY, scX, scY, vel, iTimes = false, arrPush = undefined) {
-    for (let i = 0; i < times; i++) {
+  populateGroup(group, times, x, y, img, orX, orY, scX, scY, vel, iTimes = false, arrPush = null) {
+    for (let i = 0; i < times; i += 1) {
       let element = '';
       if (iTimes === true) {
         element = this.scene.physics.add.image(x * i, y, img);

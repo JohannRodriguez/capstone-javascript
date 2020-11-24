@@ -1,59 +1,59 @@
 export default class PreloaderScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Preloader');
   }
 
-  init () {
+  init() {
     this.readyCount = 0;
   }
 
-  async preload () {
-				if (game.sound.context.state === 'suspended') {
-					game.sound.context.resume();
-				}
+  async preload() {
+    if (game.sound.context.state === 'suspended') {
+      game.sound.context.resume();
+    }
     // display progress bar
-    var progressBar = this.add.graphics();
-    var progressBox = this.add.graphics();
+   const progressBar = this.add.graphics();
+   const progressBox = this.add.graphics();
     progressBox.fillStyle(0x222222, 0.8);
     progressBox.fillRect(240, 270, 320, 50);
 
-    var width = this.cameras.main.width;
-    var height = this.cameras.main.height;
-    var loadingText = this.make.text({
+   const width = this.cameras.main.width;
+   const height = this.cameras.main.height;
+   const loadingText = this.make.text({
       x: width / 2,
       y: height / 2 - 50,
       text: 'Loading...',
       style: {
         font: '20px monospace',
-        fill: '#ffffff'
+        fill: '#ffffff',
       }
     });
     loadingText.setOrigin(0.5, 0.5);
 
-    var percentText = this.make.text({
+   const percentText = this.make.text({
       x: width / 2,
       y: height / 2 - 5,
       text: '0%',
       style: {
         font: '18px monospace',
-        fill: '#ffffff'
+        fill: '#ffffff',
       }
     });
     percentText.setOrigin(0.5, 0.5);
 
-    var assetText = this.make.text({
+   const assetText = this.make.text({
       x: width / 2,
       y: height / 2 + 50,
       text: '',
       style: {
         font: '18px monospace',
-        fill: '#ffffff'
+        fill: '#ffffff',
       }
     });
     assetText.setOrigin(0.5, 0.5);
 
     // update progress bar
-    this.load.on('progress', function (value) {
+    this.load.on('progress', (value) => {
       percentText.setText(parseInt(value * 100) + '%');
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
@@ -73,7 +73,7 @@ export default class PreloaderScene extends Phaser.Scene {
       percentText.destroy();
       assetText.destroy();
       this.ready();
-    }.bind(this));
+    });
 
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
@@ -107,7 +107,7 @@ export default class PreloaderScene extends Phaser.Scene {
     // load enemies
     this.load.image('clob', '/src/assets/enemies/clob.png');
     this.load.image('kingClob', '/src/assets/enemies/king_clob.png');
-    this.load.image('star', '/src/assets/collectables/star.png')
+    this.load.image('star', '/src/assets/collectables/star.png');
 
     // load main character
     this.load.image('run1', '/src/assets/character/Run (1).png');
@@ -207,25 +207,25 @@ export default class PreloaderScene extends Phaser.Scene {
     this.anims.create({
       key: 'run',
       frames: [
-          { key: 'run1' },
-          { key: 'run2' },
-          { key: 'run3' },
-          { key: 'run4' },
-          { key: 'run5' },
-          { key: 'run6' },
-          { key: 'run7' },
-          { key: 'run8' },
-          { key: 'run9' },
-          { key: 'run10' },
-          { key: 'run11' },
-          { key: 'run12' },
-          { key: 'run13' },
-          { key: 'run14' },
-          { key: 'run15' },
-          { key: 'run17' },
-          { key: 'run18' },
-          { key: 'run19' },
-          { key: 'run20' }
+        { key: 'run1' },
+        { key: 'run2' },
+        { key: 'run3' },
+        { key: 'run4' },
+        { key: 'run5' },
+        { key: 'run6' },
+        { key: 'run7' },
+        { key: 'run8' },
+        { key: 'run9' },
+        { key: 'run10' },
+        { key: 'run11' },
+        { key: 'run12' },
+        { key: 'run13' },
+        { key: 'run14' },
+        { key: 'run15' },
+        { key: 'run17' },
+        { key: 'run18' },
+        { key: 'run19' },
+        { key: 'run20' },
       ],
       frameRate: 30,
       repeat: -1
@@ -233,35 +233,35 @@ export default class PreloaderScene extends Phaser.Scene {
     this.anims.create({
       key: 'jump',
       frames: [
-          { key: 'jump1' },
-          { key: 'jump2' },
-          { key: 'jump3' },
-          { key: 'jump4' },
-          { key: 'jump5' },
-          { key: 'jump6' },
-          { key: 'jump7' },
-          { key: 'jump8' },
-          { key: 'jump9' },
-          { key: 'jump10' },
-          { key: 'jump11' },
-          { key: 'jump12' },
-          { key: 'jump13' },
-          { key: 'jump14' },
-          { key: 'jump15' },
-          { key: 'jump17' },
-          { key: 'jump18' },
-          { key: 'jump19' },
-          { key: 'jump20' },
-          { key: 'jump21' },
-          { key: 'jump22' },
-          { key: 'jump23' },
-          { key: 'jump24' },
-          { key: 'jump25' },
-          { key: 'jump26' },
-          { key: 'jump27' },
-          { key: 'jump28' },
-          { key: 'jump29' },
-          { key: 'jump30' }
+        { key: 'jump1' },
+        { key: 'jump2' },
+        { key: 'jump3' },
+        { key: 'jump4' },
+        { key: 'jump5' },
+        { key: 'jump6' },
+        { key: 'jump7' },
+        { key: 'jump8' },
+        { key: 'jump9' },
+        { key: 'jump10' },
+        { key: 'jump11' },
+        { key: 'jump12' },
+        { key: 'jump13' },
+        { key: 'jump14' },
+        { key: 'jump15' },
+        { key: 'jump17' },
+        { key: 'jump18' },
+        { key: 'jump19' },
+        { key: 'jump20' },
+        { key: 'jump21' },
+        { key: 'jump22' },
+        { key: 'jump23' },
+        { key: 'jump24' },
+        { key: 'jump25' },
+        { key: 'jump26' },
+        { key: 'jump27' },
+        { key: 'jump28' },
+        { key: 'jump29' },
+        { key: 'jump30' },
       ],
       frameRate: 40,
       repeat: 1
@@ -269,35 +269,35 @@ export default class PreloaderScene extends Phaser.Scene {
     this.anims.create({
       key: 'dead',
       frames: [
-          { key: 'dead1' },
-          { key: 'dead2' },
-          { key: 'dead3' },
-          { key: 'dead4' },
-          { key: 'dead5' },
-          { key: 'dead6' },
-          { key: 'dead7' },
-          { key: 'dead8' },
-          { key: 'dead9' },
-          { key: 'dead10' },
-          { key: 'dead11' },
-          { key: 'dead12' },
-          { key: 'dead13' },
-          { key: 'dead14' },
-          { key: 'dead15' },
-          { key: 'dead17' },
-          { key: 'dead18' },
-          { key: 'dead19' },
-          { key: 'dead20' },
-          { key: 'dead21' },
-          { key: 'dead22' },
-          { key: 'dead23' },
-          { key: 'dead24' },
-          { key: 'dead25' },
-          { key: 'dead26' },
-          { key: 'dead27' },
-          { key: 'dead28' },
-          { key: 'dead29' },
-          { key: 'dead30' }
+        { key: 'dead1' },
+        { key: 'dead2' },
+        { key: 'dead3' },
+        { key: 'dead4' },
+        { key: 'dead5' },
+        { key: 'dead6' },
+        { key: 'dead7' },
+        { key: 'dead8' },
+        { key: 'dead9' },
+        { key: 'dead10' },
+        { key: 'dead11' },
+        { key: 'dead12' },
+        { key: 'dead13' },
+        { key: 'dead14' },
+        { key: 'dead15' },
+        { key: 'dead17' },
+        { key: 'dead18' },
+        { key: 'dead19' },
+        { key: 'dead20' },
+        { key: 'dead21' },
+        { key: 'dead22' },
+        { key: 'dead23' },
+        { key: 'dead24' },
+        { key: 'dead25' },
+        { key: 'dead26' },
+        { key: 'dead27' },
+        { key: 'dead28' },
+        { key: 'dead29' },
+        { key: 'dead30' },
       ],
       frameRate: 40,
       repeat: 0
@@ -306,9 +306,9 @@ export default class PreloaderScene extends Phaser.Scene {
 
   ready () {
     this.scene.start('Title');
-    this.readyCount++;
+    this.readyCount += 1;
     if (this.readyCount === 2) {
       this.scene.start('Title');
     }
   }
-};
+}

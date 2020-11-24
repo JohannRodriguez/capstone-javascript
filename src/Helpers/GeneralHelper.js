@@ -1,11 +1,11 @@
 const inputValidation = (string, arr) => {
   if (string.length < 3) { return 'The name is too short'; }
   if (string.length > 10) { return 'The name is too long'; }
-  const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  const format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
   if (format.test(string) === true) {
     return "The name can't contain special characters";
   }
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     if (arr[i].user === string) {
       return 'This name is taken';
     }
@@ -21,9 +21,8 @@ const spawnReset = () => {
     return 2200;
   } else if (chance <= 70) {
     return 3000;
-  } else {
-    return 3500
   }
+  return 3500;
 }
 
 export { inputValidation, spawnReset} ;

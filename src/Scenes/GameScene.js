@@ -4,13 +4,13 @@ import { spawnReset } from '../Helpers/GeneralHelper';
 import GameHelper from '../Helpers/GameHelper';
 
 export default class GameScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Game');
   }
 
   stopMovement(parents) {
     // Stop Background when player dies
-    for (let i = 0; i < parents.length; i++) {
+    for (let i = 0; i < parents.length; i += 1) {
       parents[i].children.iterate(element => {
         element.setVelocityX(0);
       });
@@ -33,7 +33,7 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  hit (player) {
+  hit(player) {
     // Player dead actions
     if (player.getData('isDead') === false) {
       player.anims.play('dead', true);
@@ -41,26 +41,26 @@ export default class GameScene extends Phaser.Scene {
       player.body.setAccelerationX(-120);
       this.starsGroup.children.iterate(star => {
         star.body.setVelocityX(-80);
-      })
+      });
       this.time.addEvent({
         delay: 2100,
         callback: () => {
           player.body.setAccelerationX(0);
           player.body.setVelocityX(0);
-        }
+        },
       });
       this.stopMovement([this.enemies, this.bgSeaGroup, this.bgCityGroup]);
       this.time.addEvent({
         delay: 4500,
         callback: () => {
-          this.scene.start('GameOver', [this.player.getData('stars'),this.player.getData('points')]);
-        }
+          this.scene.start('GameOver', [this.player.getData('stars'), this.player.getData('points')]);
+        },
       });
     }
     player.setData('isDead', true);
   }
 
-  create () {
+  create() {
     // Create needed tools
     this.gameHelper = new GameHelper(this);
 
@@ -83,7 +83,7 @@ export default class GameScene extends Phaser.Scene {
     this.starsIcon = this.add.image(config.width - 140, 30, 'stars');
     this.starsIcon.setScale(0.4);
     this.starsPoints = this.gameHelper.newText(config.width - 110, 19, '0');
- 
+
     // Create enemies
     this.enemyHold = [];
     this.activeEnemies = 0;
@@ -93,7 +93,7 @@ export default class GameScene extends Phaser.Scene {
 
     // Create stars
     this.starsGroup = this.add.group();
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i += 1) {
       const star = this.physics.add.sprite(Phaser.Math.Between(2000, 6000), Phaser.Math.Between(350, 500), 'star');
       star.setScale(0.14, 0.14);
       star.setVelocityX(-250);
@@ -104,7 +104,7 @@ export default class GameScene extends Phaser.Scene {
 
     // Create player
     this.player = new Player(this, 60, config.height - 100, 'run').setScale(0.2, 0.2);
-    
+
     // Enemies respawn
     this.prevent600 = false;
     this.respawn = this.time.addEvent({
@@ -153,7 +153,7 @@ export default class GameScene extends Phaser.Scene {
     this.jumpKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   }
 
-  update () {
+  update() {
     this.bgCityGroup.children.iterate(element => {
       if (element.x <= -element.width * 0.209) {
         element.setX(config.width);
@@ -175,7 +175,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.starsGroup.children.iterate(star => {
-      if (star.x < - 50) {
+      if (star.x < -50) {
         this.starReset(star, this.player, false);
       }
     });
@@ -197,4 +197,4 @@ export default class GameScene extends Phaser.Scene {
       this.player.body.setVelocityY(-170);
     }
   }
-};
+}

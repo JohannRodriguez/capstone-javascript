@@ -2,15 +2,15 @@ import Button from '../Objects/Button';
 import config from '../Config/config';
 
 export default class OptionsScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Options');
   }
 
-  create () {
+  create() {
     this.model = this.sys.game.globals.model;
     this.add.image(config.width / 2, config.height / 2, 'bgB');
     this.bgGroup = this.add.group();
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 2; i += 1) {
       const bg = this.physics.add.image(config.width / 2, 630 * -i, 'mainBg');
       bg.setOrigin(0.5, 0);
       bg.setScale(0.35);
@@ -25,10 +25,10 @@ export default class OptionsScene extends Phaser.Scene {
 
     this.musicButton.setInteractive();
 
-    this.musicButton.on('pointerdown', function () {
+    this.musicButton.on('pointerdown', () => {
       this.model.musicOn = !this.model.musicOn;
       this.updateAudio();
-    }.bind(this));
+    });
 
     this.menuButton = new Button(this, 400, 500, 'btn', 'btnH', 'Menu', 'Title');
     this.menuButton.setScale(0.4);
@@ -36,7 +36,7 @@ export default class OptionsScene extends Phaser.Scene {
     this.updateAudio();
   }
 
-  update () {
+  update() {
     this.bgGroup.children.iterate(element => {
       if (element.y > config.height) {
         element.setY(-660);
@@ -57,4 +57,4 @@ export default class OptionsScene extends Phaser.Scene {
       }
     }
   }
-};
+}
