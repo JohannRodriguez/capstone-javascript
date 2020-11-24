@@ -1,4 +1,3 @@
-import 'phaser';
 import config from '../Config/config';
 import Player from '../Entities/Player';
 import { spawnReset } from '../Helpers/GeneralHelper';

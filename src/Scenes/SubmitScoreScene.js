@@ -1,4 +1,3 @@
-import 'phaser';
 import config from '../Config/config';
 import ScoreBoard from '../ScoreBoard';
 import { inputValidation } from '../Helpers/GeneralHelper';
