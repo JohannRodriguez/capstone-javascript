@@ -197,6 +197,7 @@ export default class PreloaderScene extends Phaser.Scene {
 
     window.onerror = () => {
       location.reload();
+      throw new Error('Cache not responding, reloading');
     }
   }
 
@@ -313,6 +314,7 @@ export default class PreloaderScene extends Phaser.Scene {
   ready () {
     window.onerror = () => {
       location.reload();
+      throw new Error('Cache not responding, reloading');
     }
     this.scene.start('Title');
     this.readyCount++;
