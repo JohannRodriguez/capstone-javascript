@@ -194,6 +194,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('dead30', './assets/character/Dead (30).png');
 
     this.load.html('nameForm', './assets/Forms/NameForm.html');
+
+    window.onerror = () => {
+      alert(error); 
+    };
   }
 
   create () {
