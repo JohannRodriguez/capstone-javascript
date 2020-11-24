@@ -7,6 +7,14 @@ export default class PreloaderScene extends Phaser.Scene {
     this.readyCount = 0;
   }
 
+  ready() {
+    this.scene.start('Title');
+    this.readyCount += 1;
+    if (this.readyCount === 2) {
+      this.scene.start('Title');
+    }
+  }
+
   async preload() {
     if (game.sound.context.state === 'suspended') {
       game.sound.context.resume();
@@ -66,7 +74,7 @@ export default class PreloaderScene extends Phaser.Scene {
     });
 
     // remove progress bar when complete
-    this.load.on('complete', function () {
+    this.load.on('complete', () => {
       progressBar.destroy();
       progressBox.destroy();
       loadingText.destroy();
@@ -74,8 +82,6 @@ export default class PreloaderScene extends Phaser.Scene {
       assetText.destroy();
       this.ready();
     });
-
-    this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
     // load ui
     this.load.image('btn', '/src/assets/ui/normal_btn.png');
@@ -100,9 +106,6 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('sky', '/src/assets/background/space.png');
     this.load.image('mainBg', '/src/assets/background/game_bg.png');
     this.load.image('bgB', '/src/assets/background/BG_back.png');
-
-    // load audio
-    this.load.audio('bgMusic', ['/src/assets/music.mp3']);
 
     // load enemies
     this.load.image('clob', '/src/assets/enemies/clob.png');
@@ -194,7 +197,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.html('nameForm', '/src/assets/Forms/NameForm.html');
   }
 
-  create () {
+  create() {
     this.anims.create({
       key: 'loadAnim',
       frames: this.anims.generateFrameNumbers('load', {
@@ -302,13 +305,5 @@ export default class PreloaderScene extends Phaser.Scene {
       frameRate: 40,
       repeat: 0
     });
-  }
-
-  ready () {
-    this.scene.start('Title');
-    this.readyCount += 1;
-    if (this.readyCount === 2) {
-      this.scene.start('Title');
-    }
   }
 }

@@ -19,28 +19,18 @@ export default class TitleScene extends Phaser.Scene {
     }
 
     // Game
-    this.gameButton = new Button(this, config.width/2, config.height/2 - 150, 'btn', 'btnH', 'Play!', 'Game');
+    this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'btn', 'btnH', 'Play!', 'Game');
     this.gameButton.setScale(0.4);
 
-    // Options
-    this.optionsButton = new Button(this, config.width/2, config.height/2 - 50, 'btn', 'btnH', 'Options', 'Options');
-    this.optionsButton.setScale(0.4);
-
     // Credits
-    this.creditsButton = new Button(this, config.width/2, config.height/2 + 50, 'btn', 'btnH', 'Credits', 'Credits');
+    this.creditsButton = new Button(this, config.width/2, config.height/2, 'btn', 'btnH', 'Credits', 'Credits');
     this.creditsButton.setScale(0.4);
 
     //Scores
-    this.scoreButton = new Button(this, config.width/2, config.height/2 + 150, 'btn', 'btnH', 'High Scores', 'Scores');
+    this.scoreButton = new Button(this, config.width/2, config.height/2 + 100, 'btn', 'btnH', 'High Scores', 'Scores');
     this.scoreButton.setScale(0.4);
 
     this.model = this.sys.game.globals.model;
-    if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
-      this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
-      this.bgMusic.play();
-      this.model.bgMusicPlaying = true;
-      this.sys.game.globals.bgMusic = this.bgMusic;
-    }
   }
 
   update () {
