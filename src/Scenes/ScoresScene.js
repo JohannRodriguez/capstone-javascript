@@ -62,13 +62,15 @@ export default class ScoresScene extends Phaser.Scene {
             align: 'center',
             fontStyle: 'bold',
           });
-          this.userTxt = this.add.text((config.width / 2) - 100, (35 * this.i) + 120, this.sortedArr[this.i].user, {
+          this.userTxt = this.add.text((config.width / 2) - 100, (35 * this.i) + 120,
+          this.sortedArr[this.i].user, {
             font: '20px Arial',
             fill: '#ffffff',
             align: 'center',
             fontStyle: 'bold',
           });
-          this.scoreTxt = this.add.text((config.width / 2) + 70, (35 * this.i) + 120, this.sortedArr[this.i].score, {
+          this.scoreTxt = this.add.text((config.width / 2) + 70, (35 * this.i) + 120,
+          this.sortedArr[this.i].score, {
             font: '20px Arial',
             fill: '#ffffff',
             align: 'center',

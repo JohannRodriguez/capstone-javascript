@@ -4,6 +4,15 @@ export default class GameHelper extends Phaser.Scene {
     this.scene = scene;
   }
 
+  stopMovement(parents) {
+    // Stop Background when player dies
+    for (let i = 0; i < parents.length; i += 1) {
+      parents[i].children.iterate(element => {
+        element.setVelocityX(0);
+      });
+    }
+  }
+
   newText(width, height, text, font = 20) {
     return this.scene.add.text(width, height, text, {
       font: `${font}px Arial`,

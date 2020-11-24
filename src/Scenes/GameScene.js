@@ -8,15 +8,6 @@ export default class GameScene extends Phaser.Scene {
     super('Game');
   }
 
-  stopMovement(parents) {
-    // Stop Background when player dies
-    for (let i = 0; i < parents.length; i += 1) {
-      parents[i].children.iterate(element => {
-        element.setVelocityX(0);
-      });
-    }
-  }
-
   starReset(star, player, picked = true) {
     // Respawn star when player picks it
     if (player.getData('isDead') === false) {
@@ -49,7 +40,7 @@ export default class GameScene extends Phaser.Scene {
           player.body.setVelocityX(0);
         },
       });
-      this.stopMovement([this.enemies, this.bgSeaGroup, this.bgCityGroup]);
+      this.gameHelper.stopMovement([this.enemies, this.bgSeaGroup, this.bgCityGroup]);
       this.time.addEvent({
         delay: 4500,
         callback: () => {

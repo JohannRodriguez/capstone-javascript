@@ -35,7 +35,7 @@ export default class GameOverScene extends Phaser.Scene {
       repeat: times,
     });
     this.time.addEvent({
-      delay: (delay * times) + delay,
+      delay: (del * times) + del,
       callback: () => {
         if (op > 0) {
           text.setText(`${points}`);

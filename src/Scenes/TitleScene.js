@@ -22,14 +22,14 @@ export default class TitleScene extends Phaser.Scene {
     this.gameButton = new Button(this, config.width / 2, config.height / 2 - 50, 'btn', 'btnH', 'Play!', 'Game');
     this.gameButton.setScale(0.4);
 
-    //Scores
+    // Scores
     this.scoreButton = new Button(this, config.width / 2, config.height / 2 + 50, 'btn', 'btnH', 'High Scores', 'Scores');
     this.scoreButton.setScale(0.4);
 
     this.model = this.sys.game.globals.model;
   }
 
-  update () {
+  update() {
     this.bgGroup.children.iterate(element => {
       if (element.y > config.height) {
         element.setY(-660);
@@ -37,17 +37,10 @@ export default class TitleScene extends Phaser.Scene {
     });
   }
 
-  centerButton (gameObject, offset = 0) {
+  centerButton(gameObject, offset = 0) {
     Phaser.Display.Align.In.Center(
       gameObject,
-      this.add.zone(config.width / 2, config.height / 2 - offset * 100, config.width, config.height)
+      this.add.zone(config.width / 2, config.height / 2 - offset * 100, config.width, config.height),
     );
   }
-
-  centerButtonText (gameText, gameButton) {
-    Phaser.Display.Align.In.Center(
-      gameText,
-      gameButton
-    );
-  }
-};
+}
