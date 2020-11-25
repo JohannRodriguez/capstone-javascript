@@ -39,7 +39,7 @@ The player only has one life, so the moment the player touches a crab is game ov
 
 ## Live Demo
 
-[Live Demo Link](https://condescending-joliot-8f24ee.netlify.app/)
+[Live Demo Link](https://loving-dubinsky-957daf.netlify.app/)
 
 ## Getting Started
 
