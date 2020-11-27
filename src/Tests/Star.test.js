@@ -1,8 +1,9 @@
 import Star from './TestFiles/Star';
+
 jest.mock('./TestFiles/Star');
 
 describe('Player', () => {
-  const star =  new Star();
+  const star = new Star();
 
   it('Set star scene', () => {
     star.scene = 'GameScene';
