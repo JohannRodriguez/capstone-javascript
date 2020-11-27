@@ -1,4 +1,5 @@
 import Player from './TestFiles/Player';
+
 jest.mock('./TestFiles/Player');
 
 beforeEach(() => {
@@ -6,7 +7,7 @@ beforeEach(() => {
 });
 
 describe('Player', () => {
-  const player =  new Player();
+  const player = new Player();
 
   it('Set player scene', () => {
     player.scene = 'GameScene';
