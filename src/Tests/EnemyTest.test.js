@@ -1,8 +1,9 @@
 import Enemy from './TestFiles/Enemy';
+
 jest.mock('./TestFiles/Enemy');
 
 describe('Player', () => {
-  const enemy =  new Enemy();
+  const enemy = new Enemy();
 
   it('Set enemy scene', () => {
     enemy.scene = 'GameScene';
