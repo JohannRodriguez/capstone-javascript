@@ -1,4 +1,4 @@
-import { inputValidation, spawnReset } from './Helpers/GeneralHelper';
+import { inputValidation, spawnReset } from '../Helpers/GeneralHelper';
 
 it('Checks if given string is to short', () => {
   expect(inputValidation('Li', [{ user: 'Lilith' }])).toBe('The name is too short');
